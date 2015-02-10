@@ -35,7 +35,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  foreman
+  foreman (~> 0.77.0)
   haml (~> 4.0.6)
   sinatra (~> 1.4.5)
   sinatra-websocket (~> 0.3.1)
