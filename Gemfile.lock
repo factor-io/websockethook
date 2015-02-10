@@ -3,10 +3,14 @@ GEM
   specs:
     addressable (2.3.7)
     daemons (1.1.9)
+    dotenv (1.0.2)
     em-websocket (0.3.8)
       addressable (>= 2.1.1)
       eventmachine (>= 0.12.9)
     eventmachine (1.0.7)
+    foreman (0.77.0)
+      dotenv (~> 1.0.2)
+      thor (~> 0.19.1)
     haml (4.0.6)
       tilt
     rack (1.6.0)
@@ -24,12 +28,14 @@ GEM
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0)
       rack (~> 1.0)
+    thor (0.19.1)
     tilt (1.4.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  foreman
   haml (~> 4.0.6)
   sinatra (~> 1.4.5)
   sinatra-websocket (~> 0.3.1)
