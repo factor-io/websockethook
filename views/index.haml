@@ -1,0 +1,102 @@
+!!!
+%html
+  %head
+    %title Web Socket Hook
+    %script(src='//code.jquery.com/jquery-2.1.3.min.js' type='text/javascript')
+    %script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js' type='text/javascript')
+    %script(src='/script/app.js' type='text/javascript')
+    %link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css' rel='stylesheet' type='text/css' media='all')
+    %link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet' type='text/css' media='all')
+  %body
+    %a(href='https://github.com/factor-io/websockethook')
+      %img(style='position: absolute; top: 0; right: 0; border: 0;' src='https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67' alt='Fork me on GitHub' data-canonical-src='https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png')
+
+    .container
+      .row
+        %h1 Web Socket Hook
+        %p
+          %strong Web Socket Hook
+          is a web service which accepts a web socket connection.
+
+
+      .row
+        %h2 Take it for a spin
+        #alerts
+        %p Just run the curl command for the addresses below
+        %table.table.table-bordered
+          %thead
+            %tr
+              %th ID
+              %th cURL command
+          %tbody#hooks
+            %tr#waiting
+              %td
+                .fa.fa-refresh.fa-spin
+                waiting...
+
+        %p
+          If the web socket is open you should see
+          %code {"foo":"bar"}
+          appear in the table below every time you run the curl command.
+        %p
+          Then try different values in the
+          %code --data
+          parameter in the curl command.
+      .row
+        %table.table.table-bordered
+          %thead
+            %tr
+              %th Hook ID
+              %th Message
+          %tbody#messages
+            %tr#waiting
+              %td(colspan='2')
+                .fa.fa-refresh.fa-spin
+                waiting...
+
+      .row
+        %p You can also set your own IDs
+        %form.form-inline#register
+          .form-group
+            %input.form-control#id(type='text' placeholder='ID' value='foo')
+          %button.btn.btn-primary(type='submit') Register
+
+      .row
+        %h2 How does it work?
+        %p When a connection is established the service send a message similar to this.
+        %pre
+          %code
+            :preserve
+              {
+                "type": "registered",
+                "data": {
+                  "id": "31dd0a8df6dc6d1b",
+                  "url": "/hook/31dd0a8df6dc6d1b"
+                }
+              }
+        %p
+          which tells us that it created a web hook at the address
+          %code /hook/31dd0a8df6dc6d1b
+          and can receive HTTP POST messages.
+        %p
+          Now you can perform a
+          %code curl
+          command to POST to this endpoint. When the POST occurs, the service will send another message over the web socket similar to this.
+        %pre
+          %code
+            :preserve
+              {
+                "type": "hook",
+                "id": "31dd0a8df6dc6d1b",
+                "data": {
+                  "foo": "bar"
+                }
+              }
+      
+      .row
+        %h2 Why?
+        %p
+          In
+          %a(href="")
+            %strong Factor.io
+          we have to listen for web hooks behind a firewall sometimes. For example, you can create a workflow that triggers a chef run on your servers every time code is merged in Github. But github needs to perform an HTTP POST (web hook) to trigger this workflow. Now the workflow just connects to this service and then registered it's public address with Github.
