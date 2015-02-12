@@ -23,13 +23,16 @@
     .container
       .row
         .col-md-12
-          %h1 Web Socket Hook
+          %h1
+            Web Socket Hook
+            %a.twitter-share-button(href='https://twitter.com/share' data-url="http://web.sockethook.io" data-via="factor_io") Tweet
+          %script
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
           .lead
             Built by
             %a(href='https://factor.io/') Factor.io
             and hosted on
-            %a(href='http://websockethook.io') websockethook.io
-
+            %a(href='http://web.sockethook.io') web.sockethook.io
           %blockquote
             %strong Web Socket Hook
             is a bridge between web hooks and web sockets. You can connect to the service using a web socket client and register a web hook. On the other end you can POST messages to that web hook address, which will be received by your web socket client.
