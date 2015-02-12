@@ -33,7 +33,11 @@
           %blockquote
             %strong Web Socket Hook
             is a bridge between web hooks and web sockets. You can connect to the service using a web socket client and register a web hook. On the other end you can POST messages to that web hook address, which will be received by your web socket client.
-
+          %blockquote
+            %strong Why?
+            So that you can build apps that respond to web hooks even though your app is not directly accessible from the internet. And that's exactly what
+            %a(href='http://factor.io/') Factor.io
+            needed to run your workflows on/with  your private infrastructure.
 
       .row
         .col-md-12
@@ -135,14 +139,6 @@
                   "type": "unregister",
                   "id": "my_static_address"
                 }
-      .row
-        .col-md-12
-          %h2 Why?
-          %p
-            In
-            %a(href="https://factor.io")
-              %strong Factor.io
-            we have to listen for web hooks behind a firewall sometimes. For example, you can create a workflow that triggers a chef run on your servers every time code is merged in Github. But github needs to perform an HTTP POST (web hook) to trigger this workflow. Now the workflow just connects to this service and then registered it's public address with Github.
       .row
         .col-md-12
           %h2 Disclaimer
