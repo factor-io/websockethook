@@ -26,13 +26,23 @@ $(function(){
       $('#hooks > #waiting').remove();
       var id = data.data.id
       var curl = "curl http://" + window.location.host + data.data.url + " --data \"foo=bar\"";
-      $('#hooks').append("<tr><td>" + id + "</td><td>" + curl + "</td></tr>")
+      var row = $("<tr><td class='id'></td><td class='curl'></td></tr>");
+      $('td.id', row).text(id).html();
+      $('td.curl', row).text(curl).html();
+
+      $('#hooks').append(row)
     }
 
     if(data.type=='hook'){
       message = JSON.stringify(data.data);
       $('#messages > #waiting').remove();
-      $('#messages').append("<tr><td>" + data.id + "</td><td>" + message + "</td></tr>");
+
+      var row = $("<tr><td class='id'></td><td class='message'></td></tr>");
+      
+      $('td.id',row).text(data.id).html();
+      $('td.message',row).text(message).html();
+      
+      $('#messages').append(row);
     }
 
     if(data.type=='error'){
