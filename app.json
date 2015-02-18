@@ -1,0 +1,7 @@
+{
+  "name": "websockethook",
+  "description": "A simple web service to receive web hooks over a web socket.",
+  "keywords": ["hook", "websocket"],
+  "addons": [],
+  "env": {}
+}
