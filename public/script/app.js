@@ -25,7 +25,7 @@ $(function(){
     if(data.type=='registered'){
       $('#hooks > #waiting').remove();
       var id = data.data.id
-      var curl = "curl http://" + window.location.host + data.data.url + " --data \"foo=bar\"";
+      var curl = "curl http://" + window.location.host + data.data.path + " --data \"foo=bar\"";
       var row = $("<tr><td class='id'></td><td class='curl'></td></tr>");
       $('td.id', row).text(id).html();
       $('td.curl', row).text(curl).html();

@@ -9,7 +9,7 @@ set :sockets, {}
 def register(ws, id)
   socket_info = {
     id: id,
-    url: "/hook/#{id}"
+    path: "/hook/#{id}"
   }
   settings.sockets[ws] ||= []
   settings.sockets[ws] << socket_info
