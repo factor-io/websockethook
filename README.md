@@ -1,4 +1,7 @@
-# websockethook
+# WebSocketHook.io
+[![Code Climate](https://codeclimate.com/github/factor-io/websockethook.png)](https://codeclimate.com/github/factor-io/websockethook)
+[![Dependency Status](https://gemnasium.com/factor-io/websockethook.svg)](https://gemnasium.com/factor-io/websockethook)
+
 A simple web service to receive web hooks over a web socket.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
