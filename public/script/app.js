@@ -1,9 +1,6 @@
 $(function(){
-
-
   var ws = new WebSocket('ws://' + window.location.host + window.location.pathname);
 
-  // var curl = $('#curl');
 
   var status = function(type,message){
     var close_button = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
