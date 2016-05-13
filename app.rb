@@ -6,6 +6,12 @@ require 'haml'
 set :server, 'thin'
 set :sockets, {}
 
+helpers do
+  def logger
+    request.logger
+  end
+end
+
 def register(ws, id)
   socket_info = {
     id: id,
@@ -19,7 +25,7 @@ def register(ws, id)
   }
   
   message = message_data.to_json
-  puts "sending: #{message}"
+  logger.info "sending: #{message}"
   ws.send message
   socket_info
 end
@@ -31,7 +37,7 @@ get '/' do
   if !request.websocket?
     haml :index
   else
-    warn "websocket initializing"
+    logger.info "websocket initializing"
     request.websocket do |ws|
       ws.onopen do
         id = SecureRandom.hex(8)
@@ -39,7 +45,7 @@ get '/' do
       end
 
       ws.onmessage do |message|
-        puts "received: #{message}"
+        logger.info "received: #{message}"
         data = JSON.parse(message)
         if data['type']=='register' && data['id']
           if /^\w+$/ === data['id']
@@ -55,7 +61,7 @@ get '/' do
       end
 
       ws.onclose do
-        warn "websocket closed"
+        logger.warn "websocket closed"
         settings.sockets.delete(ws)
       end
     end
@@ -75,7 +81,7 @@ post '/hook/:id' do
     data: params
   }
   message = message_data.to_json
-  puts "sending: #{message}"
+  info "sending: #{message}"
   sockets.keys.each { |ws| ws.send message }
   {}.to_json
 end
