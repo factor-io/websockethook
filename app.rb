@@ -81,7 +81,7 @@ post '/hook/:id' do
     data: params
   }
   message = message_data.to_json
-  info "sending: #{message}"
+  logger.info "sending: #{message}"
   sockets.keys.each { |ws| ws.send message }
   {}.to_json
 end
