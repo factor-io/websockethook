@@ -1,5 +1,5 @@
 $(function(){
-  var ws = new WebSocket('ws://' + window.location.host + window.location.pathname);
+  var ws = new WebSocket(window.location.protocol.replace('http','ws') + '//' + window.location.host + window.location.pathname);
 
 
   var status = function(type,message){
